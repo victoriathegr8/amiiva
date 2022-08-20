@@ -12,14 +12,27 @@ chrome.runtime.onInstalled.addListener(async() => {
  * This function will send data to the content-script to notify it of the result and
  * what the popup needs to show (whether a green success checkmark or red failure cross)
  * @param {Boolean} success values will be either true|false
+ * @param {Array} diets array of objects that specify which diets passed
+ *      Example array:
+ *      [
+ *          {
+ *              diet: "vegan",
+ *              success: false
+ *          },
+ *          {
+ *              diet: "vegeterian",
+ *              success: true
+ *          }
+ *      ]
  * @param {Array} ingredientsFailed will be an empty array if "success", else list failed ingredients
  */
-function sendResultToPopup(success, ingredientsFailed = []) {
+function sendResultToPopup(success, diets, ingredientsFailed = []) {
     //Get result of scanning ingredients and send it to popup
     chrome.tabs.sendMessage(currentTabID, {
         from: "backgroundScript",
         type: "dietaryInspectionResult",
         success: success,
+        diets: diets,
         ingredientsFailed: ingredientsFailed
     });
 }
@@ -44,7 +57,38 @@ chrome.runtime.onMessage.addListener(async(message, sender, sendResponse) => {
                     var ingredientsArray = message.data; //Use array as seen in screenshot on API `About` page
                     //Reminder: Make sure to verify a property exists before accessing it
                     //TODO: Code goes here
-                    sendResultToPopup(false, ["hello there", "reason#2"]); //Testing message sending
+
+                    /*
+                    //Test succeeded inspection
+                    sendResultToPopup(true, [{
+                        diet: "diet #1",
+                        success: true
+                    },
+                    {
+                        diet: "diet #2",
+                        success: true
+                    },
+                    {
+                        diet: "diet #3",
+                        success: true
+                    }
+                ]); //Testing message sending
+                */
+
+                    //Test failed inspection
+                    sendResultToPopup(false, [{
+                            diet: "diet #1",
+                            success: true
+                        },
+                        {
+                            diet: "diet #2",
+                            success: false
+                        },
+                        {
+                            diet: "diet #3",
+                            success: true
+                        }
+                    ], ["pizza", "ice cream"]); //Testing message sending
                 }
                 break;
             case "OpenFullDetailsInExtensionPopup":
