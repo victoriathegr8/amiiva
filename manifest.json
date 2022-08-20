@@ -11,5 +11,9 @@
     "content_scripts": [{
         "matches": ["https://*/*"],
         "js": ["scripts/contentScript.js"]
+    }],
+    "web_accessible_resources": [{
+        "resources": ["img/mainCheckmarkIcon.svg", "img/mainFailedIcon.svg", "img/miniCheckmarkIcon.svg", "img/miniFailedIcon.svg"],
+        "matches": ["https://*/*"]
     }]
 }
