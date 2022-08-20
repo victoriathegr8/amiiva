@@ -5,5 +5,9 @@
     "background": {
         "service_worker": "background.js"
     },
-    "action": {}
+    "action": {},
+    "content_scripts": [{
+        "matches": ["*"],
+        "js": "contentScript.js"
+    }]
 }
