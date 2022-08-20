@@ -5,7 +5,9 @@
     "background": {
         "service_worker": "background.js"
     },
-    "action": {},
+    "action": {
+        "default_popup": "popups/defaultPopup.html"
+    },
     "content_scripts": [{
         "matches": ["https://*/*"],
         "js": ["contentScript.js"]
