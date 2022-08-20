@@ -58,37 +58,40 @@ chrome.runtime.onMessage.addListener(async(message, sender, sendResponse) => {
                     //Reminder: Make sure to verify a property exists before accessing it
                     //TODO: Code goes here
 
-                    /*
-                    //Test succeeded inspection
-                    sendResultToPopup(true, [{
-                        diet: "diet #1",
-                        success: true
-                    },
-                    {
-                        diet: "diet #2",
-                        success: true
-                    },
-                    {
-                        diet: "diet #3",
-                        success: true
+                    function succeed() {
+                        //Test succeeded inspection
+                        sendResultToPopup(true, [{
+                                diet: "diet #1",
+                                success: true
+                            },
+                            {
+                                diet: "diet #2",
+                                success: true
+                            },
+                            {
+                                diet: "diet #3",
+                                success: true
+                            }
+                        ]); //Testing message sending
                     }
-                ]); //Testing message sending
-                */
 
-                    //Test failed inspection
-                    sendResultToPopup(false, [{
-                            diet: "diet #1",
-                            success: true
-                        },
-                        {
-                            diet: "diet #2",
-                            success: false
-                        },
-                        {
-                            diet: "diet #3",
-                            success: true
-                        }
-                    ], ["pizza", "ice cream"]); //Testing message sending
+                    function fail() {
+                        //Test failed inspection
+                        sendResultToPopup(false, [{
+                                diet: "diet #1",
+                                success: true
+                            },
+                            {
+                                diet: "diet #2",
+                                success: false
+                            },
+                            {
+                                diet: "diet #3",
+                                success: true
+                            }
+                        ], ["pizza", "ice cream"]); //Testing message sending
+                    }
+                    fail();
                 }
                 break;
             case "OpenFullDetailsInExtensionPopup":
