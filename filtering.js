@@ -38,12 +38,10 @@ let successBool = !(dietSuccessArr.includes(false)); // overall success bool
 console.log(successBool)
 let dietStatusArr = []; // param needed to send message for individual successes of diets
 for (let i = 0; i < selectedDiets.length; i++) {
-    dietStatusArr.push(
-        {
-            diet: selectedDiets[i],
-            success: dietSuccessArr[i]
-        }
-    )
+    dietStatusArr.push({
+        diet: selectedDiets[i],
+        success: dietSuccessArr[i]
+    })
 }
 console.log(dietStatusArr)
 console.log(failedIngreArr)
