@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<body>
+<!--Insert App Logo Here-->
+<h1>Hey!!</h1>
+<h2>Thanks for installing Ingredients Inspector, we won't let you down!</h2>
+<p>To finish setting up, simply pick the dietary restrictions that apply to you:</p>
+<form name="dietaryRestrictionsSelectionForm">
+    <input type="checkbox" id="restriction1" name="lactoseIntolerant" />
+    <label for="restriction1">Lactose Intolerant</label><br />
+    
+    <input type="checkbox" id="restriction2" name="glutenFree" />
+    <label for="restriction2">Gluten Free</label><br />
+    
+    <input type="checkbox" id="restriction3" name="halal" />
+    <label for="restriction3">Halal</label><br />
+    
+    <input type="checkbox" id="restriction4" name="nutAllergy" />
+    <label for="restriction4">Peanut/Tree Nut Free</label><br />
+    
+    <input type="checkbox" id="restriction5" name="kosher" />
+    <label for="restriction5">Kosher</label><br />
+    
+    <input type="checkbox" id="restriction6" name="vegetarian" />
+    <label for="restriction6">Vegeterian</label><br />
+    
+    <input type="checkbox" id="restriction7" name="vegan" />
+    <label for="restriction7">Vegan</label><br />
+    
+    <p>Can't find what you're looking for? Add it here yourself (seperate with commas):</p>
+	<textarea name="customDietaryRestriction" placeholder="Keto, Paleo, Macro..." ></textarea>
+
+</form>
+  <button id="saveChanges">Save Changes</button>
+<script>
+    var form = document.forms["dietaryRestrictionsSelectionForm"];
+    function loadDietaryPreferences() {
+        chrome.storage.sync.get({
+            dietsArray: []
+        }, (result) => {
+            var dietsArr = result.dietsArray;
+            //Populate page with elements of array
+        });
+    }
+    function saveChanges() {
+        //Gather all names into an array
+        //First get 
+        var checkboxes = document.querySelectorAll("input[type=checkbox]");
+        var diets = [];
+        for (var checkbox of checkboxes) {
+            if (checkbox.checked) {
+                diets.push(checkbox.value);
+            }
+        }
+        //Then sort thru all the remaining custom ones
+        var textarea = document.querySelector("textarea");
+        diets.concat(textarea.value.split(","));
+        
+        chrome.storage.sync.set({
+            dietsArray: diets
+        }, () => {
+            //Changes saved
+            console.log("Changes saved!");
+        });
+ 
+ 
+    }
+    
+    var saveChangesButton = document.querySelector("button#saveChanges");
+    saveChangesButton.onclick = saveChanges;
+    
+    loadDietaryPreferences();
+</script>
+</body>
+</html>
