@@ -74,6 +74,7 @@ chrome.runtime.onMessage.addListener(async(message, sender, sendResponse) => {
                 {
                     console.log("Ingredients received from API");
                     var ingredientsArray = message.data; //Use array as seen in screenshot on API `About` page
+                    console.log(ingredientsArray);
                     //Reminder: Make sure to verify a property exists before accessing it
                     //TODO: Code goes here
 
