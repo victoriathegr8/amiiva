@@ -1,7 +1,25 @@
 <!DOCTYPE html>
 <html>
-
+<style>
+    body {
+        margin: 3em 3em;
+        margin-right: 30em;
+    }
+    img {
+        width: 250px;
+        height: 250px;
+    }
+    .container {
+        display: flex;
+        box-sizing: content-box;
+        padding: 2em 2em;
+        border: 2px solid black;
+        box-shadow: 0 6px 6px rgba(0, 0, 0, 0.15);
+    }
+</style>
 <body>
+    <div class="container">
+    <div>
     <!--Insert App Logo Here-->
     <h1>Hey!!</h1>
     <h2>Thanks for installing Ingredients Inspector, we won't let you down!</h2>
@@ -31,7 +49,10 @@
         <p>Can't find a food restriction particular to you? List it here yourself (separate with commas):</p>
         <textarea name="customDietaryRestriction" placeholder="Wheat, Milk, Eggs..."></textarea>
     </form>
-    <button id="saveChanges">Save Changes</button>
+    <br><button id="saveChanges">Save Changes</button>
+    </div>
+    <img src="./img/mascot/mascot.png">
+    </div>
     <script src="configMenu.js"></script>
 </body>
 
