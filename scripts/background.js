@@ -2,13 +2,12 @@ var currentTabID = 0;
 let dietsJson;
 fetch(chrome.runtime.getURL('diets.json')) // get all diets.json data
     .then((resp) => resp.json())
-    .then(function (jsonData) {
+    .then(function(jsonData) {
         dietsJson = jsonData;
     });
 
 //Open the configuration page on install
 chrome.runtime.onInstalled.addListener(async() => {
-    chrome.storage.sync.get({});
     if (chrome.runtime.openOptionsPage) {
         chrome.runtime.openOptionsPage();
     } else {
@@ -16,6 +15,15 @@ chrome.runtime.onInstalled.addListener(async() => {
         let tab = await chrome.tabs.create({ url }); //Opens the file in a new tab
     }
 });
+
+chrome.action.onClicked.addListener(async() => {
+    if (chrome.runtime.openOptionsPage) {
+        chrome.runtime.openOptionsPage();
+    } else {
+        let url = chrome.runtime.getURL("configMenu.html"); //Gets the full URL
+        let tab = await chrome.tabs.create({ url }); //Opens the file in a new tab
+    }
+})
 
 
 
@@ -108,7 +116,8 @@ chrome.runtime.onMessage.addListener(async(message, sender, sendResponse) => {
                     let dietNamesArr = []; // list of all diet names
                     for (let i = 0; i < dietsArr.length; i++) {
                         dietNamesArr.push(dietsArr[i].diet)
-                    }
+                    } <<
+                    << << < HEAD
                     chrome.storage.sync.get({
                         dietsArray: []
                     }, (result) => {
@@ -125,8 +134,7 @@ chrome.runtime.onMessage.addListener(async(message, sender, sendResponse) => {
                                 let tempObj = dietsArr.filter(x => x.diet == selectedDiets[i])
                                 tempObj = tempObj[0];
                                 dietIngreArr.push(tempObj.ingredients);
-                            } 
-                            else dietIngreArr.push([selectedDiets[i]])
+                            } else dietIngreArr.push([selectedDiets[i]])
                         }
                         let failedIngreArr = []; // array of failed ingredients
                         let dietSuccessArr = []; // array of success bools for each selected diet
@@ -145,16 +153,13 @@ chrome.runtime.onMessage.addListener(async(message, sender, sendResponse) => {
                         let successBool = !(dietSuccessArr.includes(false)); // overall success bool
                         let dietStatusArr = []; // param needed to send message for individual successes of diets
                         for (let i = 0; i < selectedDiets.length; i++) {
-                            dietStatusArr.push(
-                                {
-                                    diet: selectedDiets[i],
-                                    success: dietSuccessArr[i]
-                                }
-                            )
+                            dietStatusArr.push({
+                                diet: selectedDiets[i],
+                                success: dietSuccessArr[i]
+                            })
                         }
                         sendResultToPopup(successBool, dietStatusArr, failedIngreArr);
                     });
-    
                 }
                 break;
             case "OpenFullDetailsInExtensionPopup":
