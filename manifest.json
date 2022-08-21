@@ -5,9 +5,7 @@
     "background": {
         "service_worker": "scripts/background.js"
     },
-    "action": {
-        "default_popup": "popups/defaultPopup.html"
-    },
+    "action": {},
     "content_scripts": [{
         "matches": ["https://www.bbcgoodfood.com/recipes/*", "https://www.allrecipes.com/recipe/*/*"],
         "js": ["scripts/contentScript.js"]
