@@ -7,7 +7,7 @@
     },
     "action": {},
     "content_scripts": [{
-        "matches": ["https://*/*"],
+        "matches": ["https://www.bbcgoodfood.com/recipes/*", "https://www.allrecipes.com/recipe/*/*"],
         "js": ["scripts/contentScript.js"]
     }],
     "web_accessible_resources": [{
