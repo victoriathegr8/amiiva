@@ -23,7 +23,8 @@ function getIngredientsListFromAPI(url) {
     fetch(fetchURL, {
             method: 'GET',
             headers: {
-                "X-Rapidapi-Key": "RAPIDAPI-KEY-GOES-HERE", //TODO: add api key here
+                "X-Rapidapi-Key": "b837e7edd9msh875f89fd76f1ba9p1487c3jsn68daf2d407f2", //TODO: add api key here
+                //"X-Rapidapi-Key": "cdf39624a0mshf4aeef53bdab2ccp1b1372jsn6a3532e5f9e0", //TODO: add api key here
                 "X-RapidAPI-Host": "recipe-ingredients-extractor.p.rapidapi.com"
             }
         })
@@ -31,6 +32,8 @@ function getIngredientsListFromAPI(url) {
         .then((result) => {
             //Get array of ingredients
             var ingredients = result["data"]["recipeIngredient"];
+            console.log(ingredients);
+            console.log(fetchURL);
             sendIngredientsToBackgroundScript(ingredients);
         });
 }
@@ -39,14 +42,15 @@ function getIngredientsListFromAPI(url) {
 
 
 //We don't gotta wait for the whole page to load, we just need the ingredients list
-/******************Use after subscribing to API*******************
+//******************Use after subscribing to API*******************
 //Make a call to API
 //Get current page's url
 let URL = window.location.href;
 getIngredientsListFromAPI(URL); //Make API request
-******************************************************************/
+//******************************************************************/
 
 //Use already formatted example data for testing purposes
+/*
 var ingredients = [
     { label: "plain flour", unit_measure: "g", quantity: 140 },
     { label: "eggs", quantity: 3 },
@@ -58,7 +62,7 @@ var ingredients = [
     { label: "rosemary sprigs", quantity: 4 }
 ];
 sendIngredientsToBackgroundScript(ingredients);
-
+*/
 
 
 
@@ -95,8 +99,7 @@ function showFullDetailsViewInExtension(success, ingredientsFailed) {
         document.getElementById("ingredient-inspector-container").appendChild(ul);
         document.getElementById("ingredient-inspector-container").appendChild(document.getElementById("view-failed-ingredients-button"));
         document.getElementById("view-failed-ingredients-button").innerHTML = "View diets checked";
-    }
-    else {
+    } else {
         failedDietsElem.style.display = "block";
         document.getElementById("ingredient-inspector-corner-popup-ingredientList").style.display = "none";
         document.getElementById("found-ingredients-label").style.display = "none";

@@ -5,10 +5,12 @@
         margin: 3em 3em;
         margin-right: 30em;
     }
+    
     img {
         width: 250px;
         height: 250px;
     }
+    
     .container {
         display: flex;
         box-sizing: content-box;
@@ -16,42 +18,49 @@
         border: 2px solid black;
         box-shadow: 0 6px 6px rgba(0, 0, 0, 0.15);
     }
+    
+    textarea {
+        font-family: "Segoe-UI", Tahoma, sans-serif;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-size: 75%;
+    }
 </style>
+
 <body>
     <div class="container">
-    <div>
-    <!--Insert App Logo Here-->
-    <h1>Hey!!</h1>
-    <h2>Thanks for installing Ingredients Inspector, we won't let you down!</h2>
-    <p>To finish setting up, simply pick the dietary restrictions that apply to you:</p>
-    <form name="dietaryRestrictionsSelectionForm">
-        <input type="checkbox" id="restriction1" name="lactoseIntolerant" />
-        <label for="restriction1">Lactose Intolerant</label><br />
+        <div>
+            <!--Insert App Logo Here-->
+            <h1>Hey!!</h1>
+            <h2>Thanks for installing Ingredients Inspector, we won't let you down!</h2>
+            <p>To finish setting up, simply pick the dietary restrictions that apply to you:</p>
+            <form name="dietaryRestrictionsSelectionForm">
+                <input type="checkbox" id="restriction1" name="lactoseIntolerant" />
+                <label for="restriction1">Lactose Intolerant</label><br />
 
-        <input type="checkbox" id="restriction2" name="glutenFree" />
-        <label for="restriction2">Gluten Free</label><br />
+                <input type="checkbox" id="restriction2" name="glutenFree" />
+                <label for="restriction2">Gluten Free</label><br />
 
-        <input type="checkbox" id="restriction3" name="halal" />
-        <label for="restriction3">Halal</label><br />
+                <input type="checkbox" id="restriction3" name="halal" />
+                <label for="restriction3">Halal</label><br />
 
-        <input type="checkbox" id="restriction4" name="nutAllergy" />
-        <label for="restriction4">Peanut/Tree Nut Free</label><br />
+                <input type="checkbox" id="restriction4" name="nutAllergy" />
+                <label for="restriction4">Peanut/Tree Nut Free</label><br />
 
-        <input type="checkbox" id="restriction5" name="kosher" />
-        <label for="restriction5">Kosher</label><br />
+                <input type="checkbox" id="restriction5" name="kosher" />
+                <label for="restriction5">Kosher</label><br />
 
-        <input type="checkbox" id="restriction6" name="vegetarian" />
-        <label for="restriction6">Vegetarian</label><br />
+                <input type="checkbox" id="restriction6" name="vegetarian" />
+                <label for="restriction6">Vegetarian</label><br />
 
-        <input type="checkbox" id="restriction7" name="vegan" />
-        <label for="restriction7">Vegan</label><br />
+                <input type="checkbox" id="restriction7" name="vegan" />
+                <label for="restriction7">Vegan</label><br />
 
-        <p>Can't find a food restriction particular to you? List it here yourself (separate with commas):</p>
-        <textarea name="customDietaryRestriction" placeholder="Wheat, Milk, Eggs..."></textarea>
-    </form>
-    <br><button id="saveChanges">Save Changes</button>
-    </div>
-    <img src="./img/mascot/mascot.png">
+                <p>Can't find a food restriction particular to you? List it here yourself (separate with commas):</p>
+                <textarea name="customDietaryRestriction" placeholder="Wheat, Milk, Eggs..."></textarea>
+            </form>
+            <br><button id="saveChanges">Save Changes</button>
+        </div>
+        <img src="./img/mascot/mascot.png">
     </div>
     <script src="configMenu.js"></script>
 </body>
