@@ -63,16 +63,45 @@ sendIngredientsToBackgroundScript(ingredients);
 
 
 function showFullDetailsViewInExtension(success, ingredientsFailed) {
-    var cornerPopup = document.querySelector("#ingredient-inspector-corner-popup");
+    // var cornerPopup = document.querySelector("#ingredient-inspector-corner-popup");
     //TODO: Animate fade away animation onRemove
-    cornerPopup.parentNode.removeChild(cornerPopup); //Remove element from DOM
+    // cornerPopup.parentNode.removeChild(cornerPopup); //Remove element from DOM
     //Send data to background script where background script will open extension and render correct popuop with info
-    chrome.runtime.sendMessage({
-        from: "contentScript",
-        type: "OpenFullDetailsInExtensionPopup",
-        success: success,
-        ingredientsFailed: ingredientsFailed
-    });
+    // chrome.runtime.sendMessage({
+    //     from: "contentScript",
+    //     type: "OpenFullDetailsInExtensionPopup",
+    //     success: success,
+    //     ingredientsFailed: ingredientsFailed
+    // });
+    let failedDietsElem = document.getElementById("ingredient-inspector-corner-popup-dietList");
+    if (failedDietsElem.style.display != "none") {
+        failedDietsElem.style.display = "none";
+        if (document.getElementById("ingredient-inspector-corner-popup-ingredientList")) {
+            document.getElementById("ingredient-inspector-corner-popup-ingredientList").remove();
+            document.getElementById("found-ingredients-label").remove();
+        }
+        let pElem = document.createElement("p");
+        pElem.setAttribute("id", "found-ingredients-label");
+        pElem.innerHTML = "Found ingredients:";
+        pElem.style.marginBottom = "10px"
+        document.getElementById("ingredient-inspector-container").appendChild(pElem);
+        let ul = document.createElement("ul");
+        ul.setAttribute("id", "ingredient-inspector-corner-popup-ingredientList");
+        for (var ingredient of ingredientsFailed) {
+            var li = document.createElement("li");
+            li.innerHTML = ingredient;
+            ul.appendChild(li);
+        }
+        document.getElementById("ingredient-inspector-container").appendChild(ul);
+        document.getElementById("ingredient-inspector-container").appendChild(document.getElementById("view-failed-ingredients-button"));
+        document.getElementById("view-failed-ingredients-button").innerHTML = "View diets checked";
+    }
+    else {
+        failedDietsElem.style.display = "block";
+        document.getElementById("ingredient-inspector-corner-popup-ingredientList").style.display = "none";
+        document.getElementById("found-ingredients-label").style.display = "none";
+        document.getElementById("view-failed-ingredients-button").innerHTML = "View found ingredients";
+    }
 }
 
 function displayCornerPopup(success, diets, ingredientsFailed) {
@@ -98,6 +127,7 @@ function displayCornerPopup(success, diets, ingredientsFailed) {
 
     //Create a container for all the content inside the popup (make relative for the absolute X button)
     var container = document.createElement("div");
+    container.setAttribute("id", "ingredient-inspector-container");
     container.style.position = "relative";
     container.style.margin = "1em 1.75em 1em 1.75em";
 
@@ -174,8 +204,15 @@ function displayCornerPopup(success, diets, ingredientsFailed) {
 
     if (!success) {
         var button = document.createElement("button");
+        button.setAttribute("id", "view-failed-ingredients-button");
         button.style.all = "initial";
-        button.appendChild(document.createTextNode("View failed ingredients..."));
+        button.style.textDecoration = "underline";
+        button.style.cursor = "pointer";
+        button.style.color = "blue";
+        button.style.display = "block";
+        button.style.margin = "0 auto";
+        button.style.marginTop = "0.5em";
+        button.appendChild(document.createTextNode("View found ingredients"));
         //Rewrite the onclick in the longer way as to pass parameters :)
         button.addEventListener("click", () => {
             showFullDetailsViewInExtension(success, ingredientsFailed);
