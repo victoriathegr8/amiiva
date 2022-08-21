@@ -15,5 +15,9 @@
     "web_accessible_resources": [{
         "resources": ["img/mainCheckmarkIcon.svg", "img/mainFailedIcon.svg", "img/miniCheckmarkIcon.svg", "img/miniFailedIcon.svg", "diets.json"],
         "matches": ["https://*/*"]
-    }]
+    }],
+    "options_page": "configMenu.html",
+    "permissions": [
+        "storage"
+    ]
 }
