@@ -171,6 +171,7 @@ function displayCornerPopup(success, diets, ingredientsFailed) {
     li.ingredient-inspector-corner-popup-dietListElement {
         padding-left: 1em;
         text-indent: -1em;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     }
     li.ingredient-inspector-corner-popup-successDiet::before {
         display: inline-block;
@@ -188,6 +189,9 @@ function displayCornerPopup(success, diets, ingredientsFailed) {
         height: 24px;
         content: "";
     }
+    #ingredient-inspector-corner-popup li, #ingredient-inspector-corner-popup p, #ingredient-inspector-corner-popup button {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
     `;
     document.head.append(styles);
     //rightInfoContainer.appendChild(styles);
@@ -204,6 +208,7 @@ function displayCornerPopup(success, diets, ingredientsFailed) {
     for (var diet of diets) {
         var li = document.createElement("li");
         li.innerHTML = diet.diet;
+        li.classList.add("ingredient-inspector-corner-popup-dietListElement");
         li.classList.add((diet.success) ? "ingredient-inspector-corner-popup-successDiet" : "ingredient-inspector-corner-popup-failedDiet");
         ul.appendChild(li);
     }
@@ -214,6 +219,7 @@ function displayCornerPopup(success, diets, ingredientsFailed) {
         button.setAttribute("id", "view-failed-ingredients-button");
         button.style.all = "initial";
         button.style.textDecoration = "underline";
+        button.style.fontFamily = `'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;`;
         button.style.cursor = "pointer";
         button.style.color = "blue";
         button.style.display = "block";
