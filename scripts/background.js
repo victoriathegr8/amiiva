@@ -117,8 +117,7 @@ chrome.runtime.onMessage.addListener(async(message, sender, sendResponse) => {
                     let dietNamesArr = []; // list of all diet names
                     for (let i = 0; i < dietsArr.length; i++) {
                         dietNamesArr.push(dietsArr[i].diet)
-                    } <<
-                    << << < HEAD
+                    }
                     chrome.storage.sync.get({
                         dietsArray: []
                     }, (result) => {
