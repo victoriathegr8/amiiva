@@ -13,11 +13,20 @@
         "js": ["scripts/contentScript.js"]
     }],
     "web_accessible_resources": [{
-        "resources": ["img/mainCheckmarkIcon.svg", "img/mainFailedIcon.svg", "img/miniCheckmarkIcon.svg", "img/miniFailedIcon.svg", "diets.json"],
+        "resources": ["img/mainCheckmarkIcon.svg", "img/mainFailedIcon.svg", "img/miniCheckmarkIcon.svg",
+            "img/miniFailedIcon.svg", "diets.json", "img/mascot/mascot16.png", "img/mascot/mascot32.png",
+            "img/mascot/mascot48.png", "img/mascot/mascot128.png"
+        ],
         "matches": ["https://*/*"]
     }],
     "options_page": "configMenu.html",
     "permissions": [
         "storage"
-    ]
+    ],
+    "icons": {
+        "16": "img/mascot/mascot16.png",
+        "32": "img/mascot/mascot32.png",
+        "48": "img/mascot/mascot48.png",
+        "128": "img/mascot/mascot128.png"
+    }
 }
