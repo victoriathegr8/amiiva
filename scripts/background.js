@@ -109,52 +109,52 @@ chrome.runtime.onMessage.addListener(async(message, sender, sendResponse) => {
                     for (let i = 0; i < dietsArr.length; i++) {
                         dietNamesArr.push(dietsArr[i].diet)
                     }
-                    let selectedDiets;
-                    // chrome.storage.sync.get({
-                    //     dietsArray: []
-                    // }, (result) => {
-                    //     selectedDiets = result.dietsArray;
-                    //     //Populate page with elements of array
-                    // });
-                    selectedDiets = ["Halal", "Vegetarian", "Dijon mustard"]; // TESTING PURPOSES selected diets
-                    let ingreLabelArr = []; // array of ingredient labels taken from API
-                    for (let i = 0; i < ingredientsArray.length; i++) {
-                        ingreLabelArr.push(ingredientsArray[i].label);
-                    }
-                    let dietIngreArr = []; // array of arrays of diet ingredients
-                    for (let i = 0; i < selectedDiets.length; i++) {
-                        if (dietNamesArr.includes(selectedDiets[i])) {
-                            let tempObj = dietsArr.filter(x => x.diet == selectedDiets[i])
-                            tempObj = tempObj[0];
-                            dietIngreArr.push(tempObj.ingredients);
-                        } 
-                        else dietIngreArr.push([selectedDiets[i]])
-                    }
-                    let failedIngreArr = []; // array of failed ingredients
-                    let dietSuccessArr = []; // array of success bools for each selected diet
-                    for (let i = 0; i < dietIngreArr.length; i++) {
-                        let tempFailedArr = [];
-                        for (let j = 0; j < dietIngreArr[i].length; j++) {
-                            if (ingreLabelArr.includes(dietIngreArr[i][j])) tempFailedArr.push(dietIngreArr[i][j])
+                    chrome.storage.sync.get({
+                        dietsArray: []
+                    }, (result) => {
+                        let selectedDiets = result.dietsArray;
+                        //Populate page with elements of array
+                        //selectedDiets = ["Halal", "Vegetarian", "Dijon mustard"]; // TESTING PURPOSES selected diets
+                        let ingreLabelArr = []; // array of ingredient labels taken from API
+                        for (let i = 0; i < ingredientsArray.length; i++) {
+                            ingreLabelArr.push(ingredientsArray[i].label);
                         }
-                        if (tempFailedArr.length > 0) {
-                            dietSuccessArr.push(false);
-                            for (let k = 0; k < tempFailedArr.length; k++) {
-                                failedIngreArr.push(tempFailedArr[k])
+                        let dietIngreArr = []; // array of arrays of diet ingredients
+                        for (let i = 0; i < selectedDiets.length; i++) {
+                            if (dietNamesArr.includes(selectedDiets[i])) {
+                                let tempObj = dietsArr.filter(x => x.diet == selectedDiets[i])
+                                tempObj = tempObj[0];
+                                dietIngreArr.push(tempObj.ingredients);
+                            } 
+                            else dietIngreArr.push([selectedDiets[i]])
+                        }
+                        let failedIngreArr = []; // array of failed ingredients
+                        let dietSuccessArr = []; // array of success bools for each selected diet
+                        for (let i = 0; i < dietIngreArr.length; i++) {
+                            let tempFailedArr = [];
+                            for (let j = 0; j < dietIngreArr[i].length; j++) {
+                                if (ingreLabelArr.includes(dietIngreArr[i][j])) tempFailedArr.push(dietIngreArr[i][j])
                             }
-                        } else dietSuccessArr.push(true);
-                    }
-                    let successBool = !(dietSuccessArr.includes(false)); // overall success bool
-                    let dietStatusArr = []; // param needed to send message for individual successes of diets
-                    for (let i = 0; i < selectedDiets.length; i++) {
-                        dietStatusArr.push(
-                            {
-                                diet: selectedDiets[i],
-                                success: dietSuccessArr[i]
-                            }
-                        )
-                    }
-                    sendResultToPopup(successBool, dietStatusArr, failedIngreArr);
+                            if (tempFailedArr.length > 0) {
+                                dietSuccessArr.push(false);
+                                for (let k = 0; k < tempFailedArr.length; k++) {
+                                    failedIngreArr.push(tempFailedArr[k])
+                                }
+                            } else dietSuccessArr.push(true);
+                        }
+                        let successBool = !(dietSuccessArr.includes(false)); // overall success bool
+                        let dietStatusArr = []; // param needed to send message for individual successes of diets
+                        for (let i = 0; i < selectedDiets.length; i++) {
+                            dietStatusArr.push(
+                                {
+                                    diet: selectedDiets[i],
+                                    success: dietSuccessArr[i]
+                                }
+                            )
+                        }
+                        sendResultToPopup(successBool, dietStatusArr, failedIngreArr);
+                    });
+    
                 }
                 break;
             case "OpenFullDetailsInExtensionPopup":
