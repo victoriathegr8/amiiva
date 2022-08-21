@@ -42,15 +42,15 @@ function getIngredientsListFromAPI(url) {
 
 
 //We don't gotta wait for the whole page to load, we just need the ingredients list
-//******************Use after subscribing to API*******************
+/******************Use after subscribing to API*******************
 //Make a call to API
 //Get current page's url
 let URL = window.location.href;
 getIngredientsListFromAPI(URL); //Make API request
-//******************************************************************/
+******************************************************************/
 
 //Use already formatted example data for testing purposes
-/*
+
 var ingredients = [
     { label: "plain flour", unit_measure: "g", quantity: 140 },
     { label: "eggs", quantity: 3 },
@@ -62,7 +62,7 @@ var ingredients = [
     { label: "rosemary sprigs", quantity: 4 }
 ];
 sendIngredientsToBackgroundScript(ingredients);
-*/
+
 
 
 
