@@ -8,8 +8,13 @@ fetch(chrome.runtime.getURL('diets.json')) // get all diets.json data
 
 //Open the configuration page on install
 chrome.runtime.onInstalled.addListener(async() => {
-    let url = chrome.runtime.getURL("configMenu.html"); //Gets the full URL
-    let tab = await chrome.tabs.create({ url }); //Opens the file in a new tab
+    chrome.storage.sync.get({});
+    if (chrome.runtime.openOptionsPage) {
+        chrome.runtime.openOptionsPage();
+    } else {
+        let url = chrome.runtime.getURL("configMenu.html"); //Gets the full URL
+        let tab = await chrome.tabs.create({ url }); //Opens the file in a new tab
+    }
 });
 
 
