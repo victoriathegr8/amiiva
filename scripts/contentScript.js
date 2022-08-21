@@ -99,42 +99,29 @@ function displayCornerPopup(success, diets, ingredientsFailed) {
     //Create a container for all the content inside the popup (make relative for the absolute X button)
     var container = document.createElement("div");
     container.style.position = "relative";
-    //container.style.padding = "1.5em";
-    container.style.display = "flex"; //Use flex styling for easier formatting of two columns
-
-    //Create internal container for the icon that will rest on the left
-    var leftIconContainer = document.createElement("div");
-    leftIconContainer.style.margin = "1.5em";
-    leftIconContainer.style.display = "flex";
-    leftIconContainer.style.flexDirection = "column";
-    leftIconContainer.style.justifyContent = "center";
-    leftIconContainer.style.alignContent = "center";
+    container.style.margin = "1em 1.75em 1em 1.75em";
 
     var mainResultIcon = document.createElement("img");
     //Set URL using one-liner ternary operator
     mainResultIcon.src = chrome.runtime.getURL(
         (success) ? "img/mainCheckmarkIcon.svg" : "img/mainFailedIcon.svg"
     );
-    mainResultIcon.style.width = "10em";
-    mainResultIcon.style.height = "10em";
-    leftIconContainer.appendChild(mainResultIcon); //Add icon to left container
-
-    container.appendChild(leftIconContainer); //Add left container to main flexbox container
-
-
-    //Create interanl container for the information that will rest on the right
-    var rightInfoContainer = document.createElement("div");
-    rightInfoContainer.style.margin = "1.5em";
+    mainResultIcon.style.width = "2em";
+    mainResultIcon.style.height = "2em";
+    mainResultIcon.style.display = "inline-table";
+    mainResultIcon.style.float = "left";
+    container.appendChild(mainResultIcon); //Add icon to popup
 
     //Create title message that depends on the result
     var resultTitle = document.createElement("h2");
     resultTitle.style.fontSize = "1.5em";
-    resultTitle.innerHTML = (success) ? "This recipe meets your diets!" : "This recipe doesn't meet all of your diets :(";
-    rightInfoContainer.appendChild(resultTitle);
+    resultTitle.style.display = "table-cell";
+    resultTitle.innerHTML = (success) ? "Inspection Passed" : "Inspection Failed!";
+    container.appendChild(resultTitle);
 
     //Add horizontal line underneath title message
     var hr = document.createElement("hr");
-    rightInfoContainer.appendChild(hr);
+    container.appendChild(hr);
 
     var styles = document.createElement("style");
     styles.innerHTML = `
@@ -174,7 +161,7 @@ function displayCornerPopup(success, diets, ingredientsFailed) {
         var pError = document.createElement("p");
         pError.style.color = "red";
         pError.innerHTML = "There are no selected diets, not sure how we got here, contact the developers, sorry :((";
-        rightInfoContainer.appendChild(pError);
+        container.appendChild(pError);
     }
     //console.log(diets);
     for (var diet of diets) {
@@ -183,7 +170,7 @@ function displayCornerPopup(success, diets, ingredientsFailed) {
         li.classList.add((diet.success) ? "ingredient-inspector-corner-popup-successDiet" : "ingredient-inspector-corner-popup-failedDiet");
         ul.appendChild(li);
     }
-    rightInfoContainer.appendChild(ul);
+    container.appendChild(ul);
 
     if (!success) {
         var button = document.createElement("button");
@@ -194,26 +181,25 @@ function displayCornerPopup(success, diets, ingredientsFailed) {
             showFullDetailsViewInExtension(success, ingredientsFailed);
         });
 
-        rightInfoContainer.appendChild(button);
+        container.appendChild(button);
     }
 
-    container.appendChild(rightInfoContainer);
 
     var closeButton = document.createElement("span");
     closeButton.innerHTML = "&times;";
 
     closeButton.style.position = "absolute";
-    closeButton.style.top = "5px";
-    closeButton.style.left = "5px";
+    closeButton.style.top = "-11px";
+    closeButton.style.left = "-22px";
 
     closeButton.style.color = "gray";
     closeButton.style.cursor = "pointer";
 
-    closeButton.style.fontSize = "2em";
-    closeButton.style.width = "1em";
-    closeButton.style.height = "1em";
+    closeButton.style.fontSize = "1.2em";
+    //closeButton.style.width = "1em";
+    //closeButton.style.height = "1em";
 
-    closeButton.style.textAlign = "center";
+    //closeButton.style.textAlign = "center";
 
     closeButton.addEventListener("click", () => {
         //close popup, no further questions
