@@ -151,6 +151,10 @@ function displayCornerPopup(success, diets, ingredientsFailed) {
 
     //Add horizontal line underneath title message
     var hr = document.createElement("hr");
+    hr.style.border = 0;
+    hr.style.height = "1px";
+    hr.style.backgroundImage = "linear-gradient(to right, rgba(45, 45, 45, 0.25) 0%, rgba(45, 45, 45, 0.75) 20%, rgba(45, 45, 45, 0.75) 80%, rgba(45, 45, 45, 0.25))";
+    hr.style.borderRadius = "50%";
     container.appendChild(hr);
 
     var styles = document.createElement("style");
