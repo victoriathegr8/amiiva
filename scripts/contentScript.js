@@ -217,7 +217,7 @@ function displayCornerPopup(success, diets, ingredientsFailed) {
 
     closeButton.addEventListener("click", () => {
         //close popup, no further questions
-
+        div.style.display = "none";
     });
 
     container.appendChild(closeButton);

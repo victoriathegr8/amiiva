@@ -1,0 +1,57 @@
+[
+    {
+        "diet": "Lactose Intolerant",
+        "ingredients": [
+            "milk",
+            "yogurt",
+            "butter"
+        ]
+    },
+    {
+        "diet": "Gluten Free",
+        "ingredients": [
+            "bread",
+            "flour",
+            "pasta"
+        ]
+    },
+    {
+        "diet": "Halal",
+        "ingredients": [
+            "pork",
+            "gelatin",
+            "bacon"
+        ]
+    },
+    {
+        "diet": "Peanut/Tree Nut Free",
+        "ingredients": [
+            "peanuts",
+            "almonds",
+            "walnuts"
+        ]
+    },
+    {
+        "diet": "Kosher",
+        "ingredients": [
+            "pork",
+            "sirloin"
+        ]
+    },
+    {
+        "diet": "Vegetarian",
+        "ingredients": [
+            "chicken",
+            "steak",
+            "shrimp"
+        ]
+    },
+    {
+        "diet": "Vegan",
+        "ingredients": [
+            "eggs",
+            "chicken",
+            "butter"
+        ]
+    }
+]
